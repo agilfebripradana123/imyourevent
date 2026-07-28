@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+/* =========================
+   GLOBAL THEME
+========================= */
+
+@theme {
+  /* Font */
+  --font-sans: "Inter", sans-serif;
+
+  /* Background */
+  --color-background: #0b0b0d;
+  --color-surface: #141416;
+  --color-card: #1b1b1f;
+  --color-border: #34343a;
+
+  /* Brand */
+  --color-primary: #e83e9c;
+  --color-primary-hover: #f052ad;
+  --color-violet: #8b5cf6;
+  --color-blue: #2684ff;
+
+  /* Text */
+  --color-heading: #f8f8fa;
+  --color-text: #c5c5cc;
+  --color-muted: #85858f;
+
+  /* Status */
+  --color-success: #36d399;
+  --color-danger: #f43f5e;
+
+  /* Border Radius */
+  --radius-card: 16px;
+  --radius-button: 12px;
+  --radius-input: 10px;
+}
+
+/* =========================
+   GLOBAL RESET
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
+  background-color: var(--color-background);
+  color: var(--color-text);
+
+  font-family: var(--font-sans);
+  font-weight: 400;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  color: var(--color-heading);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container-app {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-app {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-app {
+    padding-inline: 2rem;
+  }
+}
