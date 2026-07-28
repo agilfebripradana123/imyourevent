@@ -77,7 +77,7 @@ function Home() {
           "
         />
 
-        <div className="container-app relative">
+        <div className="container-app relative" data-aos="fade-up">
           {/* SECTION HEADER */}
           <div
             className="
@@ -161,7 +161,7 @@ function Home() {
           </div>
 
           {/* CONTENT */}
-          <div className="mt-10">
+          <div className="mt-10" data-aos="fade-up">
             {loadingEvents ? (
               /* LOADING */
               <div

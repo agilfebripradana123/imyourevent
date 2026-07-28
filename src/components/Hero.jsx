@@ -89,7 +89,7 @@ function Hero() {
     pb-16
   "
       >
-        <div className="max-w-3xl">
+        <div className="max-w-3xl animate__animated animate__fadeInUp">
           {/* Heading */}
           <h1
             className="

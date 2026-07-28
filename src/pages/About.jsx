@@ -163,6 +163,7 @@ function About() {
             lg:grid-cols-[0.8fr_1.2fr]
             lg:gap-20
           "
+          data-aos="fade-up"
         >
           <div>
             <p className="text-sm font-semibold text-primary">
@@ -215,6 +216,7 @@ function About() {
               gap-5
               md:grid-cols-3
             "
+            data-aos="fade-up"
           >
             {features.map((feature) => (
               <article
@@ -266,6 +268,7 @@ function About() {
             py-12
             md:px-10
           "
+          data-aos="fade-up"
         >
           <div
             className="

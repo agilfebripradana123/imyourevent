@@ -34,9 +34,7 @@ function Events() {
     } catch (error) {
       console.error("Gagal mengambil event:", error);
 
-      setFetchError(
-        "Event gagal dimuat. Silakan coba lagi.",
-      );
+      setFetchError("Event gagal dimuat. Silakan coba lagi.");
     } finally {
       setLoading(false);
     }
@@ -51,11 +49,7 @@ function Events() {
   // =========================
   const categories = useMemo(() => {
     return [
-      ...new Set(
-        events
-          .map((event) => event.category)
-          .filter(Boolean),
-      ),
+      ...new Set(events.map((event) => event.category).filter(Boolean)),
     ].sort((a, b) => a.localeCompare(b));
   }, [events]);
 
@@ -64,11 +58,7 @@ function Events() {
   // =========================
   const locations = useMemo(() => {
     return [
-      ...new Set(
-        events
-          .map((event) => event.location)
-          .filter(Boolean),
-      ),
+      ...new Set(events.map((event) => event.location).filter(Boolean)),
     ].sort((a, b) => a.localeCompare(b));
   }, [events]);
 
@@ -86,10 +76,8 @@ function Events() {
     if (keyword) {
       result = result.filter((event) => {
         const title = event.title?.toLowerCase() ?? "";
-        const eventLocation =
-          event.location?.toLowerCase() ?? "";
-        const eventCategory =
-          event.category?.toLowerCase() ?? "";
+        const eventLocation = event.location?.toLowerCase() ?? "";
+        const eventCategory = event.category?.toLowerCase() ?? "";
 
         return (
           title.includes(keyword) ||
@@ -103,27 +91,21 @@ function Events() {
     // Category
     // -------------------------
     if (category !== "Semua") {
-      result = result.filter(
-        (event) => event.category === category,
-      );
+      result = result.filter((event) => event.category === category);
     }
 
     // -------------------------
     // Location
     // -------------------------
     if (location !== "Semua") {
-      result = result.filter(
-        (event) => event.location === location,
-      );
+      result = result.filter((event) => event.location === location);
     }
 
     // -------------------------
     // Price
     // -------------------------
     if (price === "Gratis") {
-      result = result.filter(
-        (event) => Number(event.price) === 0,
-      );
+      result = result.filter((event) => Number(event.price) === 0);
     }
 
     if (price === "Dibawah 50000") {
@@ -138,17 +120,12 @@ function Events() {
       result = result.filter((event) => {
         const eventPrice = Number(event.price);
 
-        return (
-          eventPrice >= 50000 &&
-          eventPrice <= 100000
-        );
+        return eventPrice >= 50000 && eventPrice <= 100000;
       });
     }
 
     if (price === "Diatas 100000") {
-      result = result.filter(
-        (event) => Number(event.price) > 100000,
-      );
+      result = result.filter((event) => Number(event.price) > 100000);
     }
 
     // -------------------------
@@ -157,48 +134,31 @@ function Events() {
     if (sort === "tanggal-terdekat") {
       result.sort(
         (a, b) =>
-          new Date(`${a.date}T00:00:00`) -
-          new Date(`${b.date}T00:00:00`),
+          new Date(`${a.date}T00:00:00`) - new Date(`${b.date}T00:00:00`),
       );
     }
 
     if (sort === "tanggal-terbaru") {
       result.sort(
         (a, b) =>
-          new Date(`${b.date}T00:00:00`) -
-          new Date(`${a.date}T00:00:00`),
+          new Date(`${b.date}T00:00:00`) - new Date(`${a.date}T00:00:00`),
       );
     }
 
     if (sort === "harga-rendah") {
-      result.sort(
-        (a, b) =>
-          Number(a.price) - Number(b.price),
-      );
+      result.sort((a, b) => Number(a.price) - Number(b.price));
     }
 
     if (sort === "harga-tinggi") {
-      result.sort(
-        (a, b) =>
-          Number(b.price) - Number(a.price),
-      );
+      result.sort((a, b) => Number(b.price) - Number(a.price));
     }
 
     if (sort === "nama") {
-      result.sort((a, b) =>
-        a.title.localeCompare(b.title),
-      );
+      result.sort((a, b) => a.title.localeCompare(b.title));
     }
 
     return result;
-  }, [
-    events,
-    search,
-    category,
-    location,
-    price,
-    sort,
-  ]);
+  }, [events, search, category, location, price, sort]);
 
   // =========================
   // RESET FILTER
@@ -232,7 +192,7 @@ function Events() {
 
   return (
     <main className="min-h-screen bg-background pb-20 pt-32">
-      <div className="container-app">
+      <div className="container-app ">
         {/* =========================
             HEADER
         ========================== */}
@@ -244,16 +204,12 @@ function Events() {
 
           <h1 className="mt-3 text-3xl font-bold tracking-tight text-heading sm:text-4xl lg:text-5xl">
             Temukan Event
-            <span className="text-primary">
-              {" "}
-              Favoritmu.
-            </span>
+            <span className="text-primary"> Favoritmu.</span>
           </h1>
 
           <p className="mt-4 max-w-xl text-sm leading-7 text-muted sm:text-base">
-            Temukan konser, workshop, konferensi,
-            festival, dan berbagai event menarik
-            lainnya.
+            Temukan konser, workshop, konferensi, festival, dan berbagai event
+            menarik lainnya.
           </p>
         </div>
 
@@ -287,9 +243,7 @@ function Events() {
                 id="search-event"
                 type="text"
                 value={search}
-                onChange={(e) =>
-                  setSearch(e.target.value)
-                }
+                onChange={(e) => setSearch(e.target.value)}
                 placeholder="Cari nama, kategori, atau lokasi event..."
                 className="
                   w-full
@@ -344,20 +298,13 @@ function Events() {
 
               <select
                 value={category}
-                onChange={(e) =>
-                  setCategory(e.target.value)
-                }
+                onChange={(e) => setCategory(e.target.value)}
                 className={selectClass}
               >
-                <option value="Semua">
-                  Semua Kategori
-                </option>
+                <option value="Semua">Semua Kategori</option>
 
                 {categories.map((item) => (
-                  <option
-                    key={item}
-                    value={item}
-                  >
+                  <option key={item} value={item}>
                     {item}
                   </option>
                 ))}
@@ -372,20 +319,13 @@ function Events() {
 
               <select
                 value={location}
-                onChange={(e) =>
-                  setLocation(e.target.value)
-                }
+                onChange={(e) => setLocation(e.target.value)}
                 className={selectClass}
               >
-                <option value="Semua">
-                  Semua Lokasi
-                </option>
+                <option value="Semua">Semua Lokasi</option>
 
                 {locations.map((item) => (
-                  <option
-                    key={item}
-                    value={item}
-                  >
+                  <option key={item} value={item}>
                     {item}
                   </option>
                 ))}
@@ -400,30 +340,18 @@ function Events() {
 
               <select
                 value={price}
-                onChange={(e) =>
-                  setPrice(e.target.value)
-                }
+                onChange={(e) => setPrice(e.target.value)}
                 className={selectClass}
               >
-                <option value="Semua">
-                  Semua Harga
-                </option>
+                <option value="Semua">Semua Harga</option>
 
-                <option value="Gratis">
-                  Gratis
-                </option>
+                <option value="Gratis">Gratis</option>
 
-                <option value="Dibawah 50000">
-                  Di bawah Rp50.000
-                </option>
+                <option value="Dibawah 50000">Di bawah Rp50.000</option>
 
-                <option value="50000-100000">
-                  Rp50.000 - Rp100.000
-                </option>
+                <option value="50000-100000">Rp50.000 - Rp100.000</option>
 
-                <option value="Diatas 100000">
-                  Di atas Rp100.000
-                </option>
+                <option value="Diatas 100000">Di atas Rp100.000</option>
               </select>
             </div>
 
@@ -435,30 +363,18 @@ function Events() {
 
               <select
                 value={sort}
-                onChange={(e) =>
-                  setSort(e.target.value)
-                }
+                onChange={(e) => setSort(e.target.value)}
                 className={selectClass}
               >
-                <option value="tanggal-terdekat">
-                  Tanggal Terdekat
-                </option>
+                <option value="tanggal-terdekat">Tanggal Terdekat</option>
 
-                <option value="tanggal-terbaru">
-                  Tanggal Terbaru
-                </option>
+                <option value="tanggal-terbaru">Tanggal Terbaru</option>
 
-                <option value="harga-rendah">
-                  Harga Terendah
-                </option>
+                <option value="harga-rendah">Harga Terendah</option>
 
-                <option value="harga-tinggi">
-                  Harga Tertinggi
-                </option>
+                <option value="harga-tinggi">Harga Tertinggi</option>
 
-                <option value="nama">
-                  Nama A-Z
-                </option>
+                <option value="nama">Nama A-Z</option>
               </select>
             </div>
           </div>
@@ -467,11 +383,9 @@ function Events() {
         {/* =========================
             RESULT HEADER
         ========================== */}
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between" >
           <div>
-            <h2 className="text-2xl font-bold text-heading">
-              Semua Event
-            </h2>
+            <h2 className="text-2xl font-bold text-heading">Semua Event</h2>
 
             {!loading && !fetchError && (
               <p className="mt-1 text-sm text-muted">
@@ -512,9 +426,7 @@ function Events() {
           <div className="mt-7 rounded-card border border-border bg-card px-6 py-16 text-center">
             <i className="ri-loader-4-line inline-block animate-spin text-3xl text-primary"></i>
 
-            <p className="mt-4 text-sm text-muted">
-              Memuat event...
-            </p>
+            <p className="mt-4 text-sm text-muted">Memuat event...</p>
           </div>
         )}
 
@@ -541,9 +453,7 @@ function Events() {
               Gagal memuat event
             </h3>
 
-            <p className="mt-2 text-sm text-muted">
-              {fetchError}
-            </p>
+            <p className="mt-2 text-sm text-muted">{fetchError}</p>
 
             <button
               type="button"
@@ -572,11 +482,9 @@ function Events() {
         {/* =========================
             EVENT GRID
         ========================== */}
-        {!loading &&
-          !fetchError &&
-          filteredEvents.length > 0 && (
-            <div
-              className="
+        {!loading && !fetchError && filteredEvents.length > 0 && (
+          <div
+            className="
                 mt-7
                 grid
                 grid-cols-1
@@ -584,25 +492,20 @@ function Events() {
                 sm:grid-cols-2
                 lg:grid-cols-3
               "
-            >
-              {filteredEvents.map((event) => (
-                <EventCard
-                  key={event.id}
-                  event={event}
-                />
-              ))}
-            </div>
-          )}
+          >
+            {filteredEvents.map((event) => (
+              <EventCard key={event.id} event={event} />
+            ))}
+          </div>
+        )}
 
         {/* =========================
             EMPTY
         ========================== */}
-        {!loading &&
-          !fetchError &&
-          filteredEvents.length === 0 && (
-            <div className="mt-7 rounded-card border border-border bg-card px-6 py-16 text-center">
-              <div
-                className="
+        {!loading && !fetchError && filteredEvents.length === 0 && (
+          <div className="mt-7 rounded-card border border-border bg-card px-6 py-16 text-center">
+            <div
+              className="
                   mx-auto
                   flex h-14 w-14
                   items-center
@@ -612,23 +515,22 @@ function Events() {
                   bg-primary/10
                   text-primary
                 "
-              >
-                <i className="ri-search-line text-2xl"></i>
-              </div>
+            >
+              <i className="ri-search-line text-2xl"></i>
+            </div>
 
-              <h3 className="mt-4 text-xl font-semibold text-heading">
-                Event tidak ditemukan
-              </h3>
+            <h3 className="mt-4 text-xl font-semibold text-heading">
+              Event tidak ditemukan
+            </h3>
 
-              <p className="mt-2 text-sm text-muted">
-                Coba ubah kata pencarian atau filter
-                yang digunakan.
-              </p>
+            <p className="mt-2 text-sm text-muted">
+              Coba ubah kata pencarian atau filter yang digunakan.
+            </p>
 
-              <button
-                type="button"
-                onClick={resetFilter}
-                className="
+            <button
+              type="button"
+              onClick={resetFilter}
+              className="
                   mt-6
                   inline-flex
                   items-center
@@ -642,12 +544,12 @@ function Events() {
                   transition
                   hover:bg-primary-hover
                 "
-              >
-                <i className="ri-refresh-line"></i>
-                Reset Filter
-              </button>
-            </div>
-          )}
+            >
+              <i className="ri-refresh-line"></i>
+              Reset Filter
+            </button>
+          </div>
+        )}
       </div>
     </main>
   );

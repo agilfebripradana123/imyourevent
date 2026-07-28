@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { motion } from "framer-motion";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -126,7 +127,7 @@ function Navbar() {
   return (
     <>
       <header className="absolute left-0 top-0 z-50 w-full">
-        <div className="container-app">
+        <div className="container-app animate__animated animate__fadeInDown">
           {/* =========================
               NAVBAR
           ========================== */}
@@ -151,15 +152,31 @@ function Navbar() {
                 DESKTOP MENU
             ========================== */}
             <nav className="hidden items-center gap-2 md:flex">
-              {navLinks.map((item) => (
-                <NavLink
-                  key={item.path}
-                  to={item.path}
-                  className={() => navClass(item.path)}
-                >
-                  {item.label}
-                </NavLink>
-              ))}
+              {navLinks.map((item) => {
+                const active = checkActive(item.path);
+
+                return (
+                  <NavLink
+                    key={item.path}
+                    to={item.path}
+                    className="relative rounded-full px-4 py-2 text-sm font-medium text-white"
+                  >
+                    {active && (
+                      <motion.div
+                        layoutId="navbar-active"
+                        className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-violet shadow-[0_0_20px_rgba(232,62,156,0.35)]"
+                        transition={{
+                          type: "spring",
+                          stiffness: 450,
+                          damping: 35,
+                        }}
+                      />
+                    )}
+
+                    <span className="relative z-10">{item.label}</span>
+                  </NavLink>
+                );
+              })}
             </nav>
 
             {/* =========================
